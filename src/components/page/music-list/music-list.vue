@@ -18,7 +18,7 @@
         </div>
         <scroll @scroll="scroll" :probe-type="protoType" :listen-scroll="listenScroll" :data="songs" class="list" ref="list">
             <div class="song-list-wrapper" >
-                <song-list @selectItem="selectItem" :songs="songs"></song-list>
+                <song-list @select="selectItem" :songs="songs"></song-list>
             </div>
         <div class="loading-container" v-show="!songs.length">
           <loading></loading>
@@ -31,6 +31,7 @@
 import Scroll from "@/components/common/scroll/scroll";
 import songList from "../song-list/song-list";
 import { prefixStyle } from "@/assets/js/dom";
+import { mapActions } from "vuex";
 const RESERVED_HEIGHT = 40;
 const transform = prefixStyle("transform");
 const backdrop = prefixStyle("backdrop-filter");
@@ -60,6 +61,7 @@ export default {
     this.imageHeight = this.$refs.bgImg.clientHeight;
     this.minTranslateY = -this.imageHeight + RESERVED_HEIGHT;
     this.$refs.list.$el.style.top = `${this.$refs.bgImg.clientHeight}px`;
+    console.log(111);
   },
   created() {
     this.protoType = 3;
@@ -72,9 +74,15 @@ export default {
     back() {
       this.$router.back();
     },
-    selectItem(item,index) {
-      
-    }
+    selectItem(item, index) {
+      //点击列表触发的事件
+      console.log(this.songs,index)
+      this.selectPlay({
+        list: this.songs,
+        index
+      });
+    },
+    ...mapActions(["selectPlay"])
   },
   watch: {
     scrollY(newY) {
@@ -110,7 +118,6 @@ export default {
   },
   computed: {
     bgStyle() {
-      console.log(`background-image:url(${this.bgImage})`);
       return `background-image:url(${this.bgImage})`;
     }
   },

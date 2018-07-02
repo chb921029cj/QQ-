@@ -18,10 +18,9 @@ export default {
   components: {
     MHeader,
     Tab,
-    Play
+    Play,
   },
   created() {
-    console.log(this.$axios);
   }
 };
 </script>

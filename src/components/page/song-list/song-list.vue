@@ -23,9 +23,13 @@ export default {
     getDesc(song) {
       return `${song.singer}.${song.album}`;
     },
+    //告诉父组件推出的什么
     selectItem(item, index) {
-      this.$emit(item, index);
+      this.$emit('select', item, index)
     }
+  },
+  mounted(){
+    console.log(1)
   }
 };
 </script>

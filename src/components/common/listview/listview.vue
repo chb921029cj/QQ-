@@ -67,7 +67,6 @@ export default {
   computed: {
     shortcutList() {
       return this.data.map(group => {
-        console.log(group);
         return group.title.substr(0, 1);
       });
     },
@@ -90,7 +89,7 @@ export default {
 
   methods: {
     selectItem(item) {
-      console.log(item);
+    
       this.$emit("select", item);
     },
     onShortcutTouchStart(e) {
